@@ -1,4 +1,4 @@
-from __future__ import division
+
 import libtbx.path
 import sys
 
@@ -34,7 +34,7 @@ def create(zip_file_name, path_unzipsfx_exe=None):
 def run(args):
   "usage: libtbx.create_unzipsfx [path_unzipsfx_exe] zip_file_name"
   if (not len(args) in (1,2) or "-h" in args or "--help" in args):
-    print run.__doc__
+    print(run.__doc__)
     return
   if (len(args) == 1):
     create(zip_file_name=args[0])

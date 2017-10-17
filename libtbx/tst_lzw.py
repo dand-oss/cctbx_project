@@ -1,4 +1,4 @@
-from __future__ import division
+
 def run(args):
   assert len(args) == 0
   from libtbx import lzw
@@ -11,7 +11,7 @@ def run(args):
   decoding = dec.decodefrombytes(encoded)
   decoded = "".join(decoding)
   assert decoded == bigstr
-  print "OK"
+  print("OK")
 
 if (__name__ == "__main__"):
   import sys

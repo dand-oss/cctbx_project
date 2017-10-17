@@ -2,7 +2,7 @@
 Generic job scheduling
 """
 
-from __future__ import division
+
 
 
 class SchedulingError(Exception):

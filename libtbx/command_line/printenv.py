@@ -1,11 +1,11 @@
-from __future__ import division
+
 import sys, os
 
 def show(out):
-  var_names = os.environ.keys()
+  var_names = list(os.environ.keys())
   var_names.sort()
   for var_name in var_names:
-    print >> out, "%s=%s" % (var_name, os.environ[var_name])
+    print("%s=%s" % (var_name, os.environ[var_name]), file=out)
 
 def run(args):
   assert len(args) == 0

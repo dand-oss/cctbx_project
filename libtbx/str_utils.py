@@ -1,6 +1,6 @@
 
-from __future__ import division, absolute_import
-import cStringIO
+
+import io
 import sys
 
 def format_none(format, null_value=0, replace_with="None"):
@@ -125,7 +125,7 @@ def make_header (line, out=None, header_len=80):
   out_string = "\n"+"="*(fill_l-1)+" "+line+" "+"="*(fill_r-1)+"\n"
   if(len(out_string) > 80):
     out_string = "\n"+"="*(fill_l-1)+" "+line+" "+"="*(fill_r-2)+"\n"
-  print >> out, out_string
+  print(out_string, file=out)
   out.flush()
 
 def make_sub_header(text, out=None, header_len=80, sep='-'):
@@ -149,7 +149,7 @@ def make_sub_header(text, out=None, header_len=80, sep='-'):
   >>>
   """
   if (out is None): out = sys.stdout
-  assert isinstance(sep, basestring)
+  assert isinstance(sep, str)
   border = sep*10
   line = border+text+border
   line_len = len(line)
@@ -163,7 +163,7 @@ def make_sub_header(text, out=None, header_len=80, sep='-'):
   out_string = "\n"+" "*(fill_l-1)+" "+line+" "+" "*(fill_r-1)+"\n"
   if(len(out_string) > 80):
     out_string = "\n"+" "*(fill_l-1)+" "+line+" "+" "*(fill_r-2)+"\n"
-  print >> out, out_string
+  print(out_string, file=out)
   out.flush()
 
 def wordwrap (text, max_chars=80) :
@@ -232,9 +232,9 @@ def show_sorted_by_counts(
     max([len(l) for l,c,a in lca]),
     max([len(str(lca[i][1])) for i in [0,-1]]))
   for l,c,a in lca:
-    print >> out, prefix+fmt % (l,c),
-    if (a is not None and len(a) > 0): print >> out, a,
-    print >> out
+    print(prefix+fmt % (l,c), end=' ', file=out)
+    if (a is not None and len(a) > 0): print(a, end=' ', file=out)
+    print(file=out)
   return True
 
 def overwrite_at(s, offset, replacement):
@@ -271,7 +271,7 @@ class line_feeder(object):
   def __iter__(self):
     return self
 
-  def next(self):
+  def __next__(self):
     if (not self.eof):
       try:
         return self.f.next()[:-1]
@@ -281,14 +281,14 @@ class line_feeder(object):
 
   def next_non_empty(self):
     while 1:
-      result = self.next()
+      result = next(self)
       if (self.eof or len(result.strip()) != 0):
         return result
 
 # cStringIO with pickling support
 class StringIO (object) :
   def __init__ (self, *args, **kwds) :
-    self._buffer = cStringIO.StringIO(*args, **kwds)
+    self._buffer = io.StringIO(*args, **kwds)
 
   def __getattr__ (self, *args, **kwds) :
     return getattr(self._buffer, *args, **kwds)
@@ -477,7 +477,7 @@ class framed_output (object) :
 def print_message_in_box (message, **kwds) :
   box = framed_output(**kwds)
   for line in line_breaker(message, box.get_best_text_width()) :
-    print >> box, line
+    print(line, file=box)
   del box
 
 def make_big_header (line, out=None, header_len=80, border_char="#") :

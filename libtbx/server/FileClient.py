@@ -1,6 +1,6 @@
-from __future__ import division
+
 try:
-  import cPickle as pickle
+  import pickle as pickle
 except ImportError:
   import pickle
 import socket
@@ -175,7 +175,7 @@ def LockReadPickleProcessWritePickleUnlock(client, file, id, func):
 
 if __name__=="__main__":
 
-  import FileServer
+  from . import FileServer
   import time
   import libtbx.load_env
 
@@ -195,7 +195,7 @@ if __name__=="__main__":
 
   client = FileServer.GetServerClient()
 
-  print client
+  print(client)
   if client:
-    print client.tester()
+    print(client.tester())
     #client.shutdown()

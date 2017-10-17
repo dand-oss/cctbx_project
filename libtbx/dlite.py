@@ -1,5 +1,5 @@
 "light-weight, simple source_path, target_path dependency management"
-from __future__ import division
+
 
 from libtbx import easy_pickle
 from libtbx.utils import hashlib_md5
@@ -101,9 +101,9 @@ class target_db(object):
 
   def show(self, out=None):
     if (out is None): out = sys.stdout
-    for pair_info in self.pair_infos.values():
+    for pair_info in list(self.pair_infos.values()):
       for attr in ["source", "target"]:
         node = getattr(pair_info, attr)
-        print >> out, attr+":", node.path, "mtime:", node.mtime,\
-                                           "md5:", node.md5
-      print >> out, "-"*79
+        print(attr+":", node.path, "mtime:", node.mtime,\
+                                           "md5:", node.md5, file=out)
+      print("-"*79, file=out)

@@ -1,8 +1,8 @@
-from __future__ import division
 
-from Queue import Empty
+
+from queue import Empty
 try:
-  import cPickle as pickle
+  import pickle as pickle
 except ImportError:
   import pickle
 import fcntl
@@ -17,7 +17,7 @@ class instant(object):
 
   def __call__(self):
 
-    raise Empty, "No data found in queue"
+    raise Empty("No data found in queue")
 
 
 class timed(object):
@@ -40,7 +40,7 @@ class timed(object):
       time.sleep( waittime )
 
     else:
-      raise Empty, "No data found in queue within timeout"
+      raise Empty("No data found in queue within timeout")
 
 
 class eternal(object):

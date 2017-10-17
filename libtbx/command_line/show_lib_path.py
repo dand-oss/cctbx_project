@@ -1,8 +1,8 @@
-from __future__ import division
+
 import libtbx.load_env
 
 def run():
-  print abs(libtbx.env.lib_path)
+  print(abs(libtbx.env.lib_path))
 
 if (__name__ == "__main__"):
   run()

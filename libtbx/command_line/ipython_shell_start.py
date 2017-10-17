@@ -1,4 +1,4 @@
-from __future__ import division
+
 # LIBTBX_SET_DISPATCHER_NAME libtbx.ipython
 import re
 import sys

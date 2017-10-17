@@ -1,4 +1,4 @@
-from __future__ import division
+
 import sys, os
 
 def norm(path):
@@ -54,4 +54,4 @@ def run(args):
   return os.pathsep.join(remaining_env_paths)
 
 if (__name__ == "__main__"):
-  print run(sys.argv[1:])
+  print(run(sys.argv[1:]))

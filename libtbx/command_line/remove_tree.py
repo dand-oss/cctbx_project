@@ -1,4 +1,4 @@
-from __future__ import division
+
 import distutils.dir_util
 import sys, os
 

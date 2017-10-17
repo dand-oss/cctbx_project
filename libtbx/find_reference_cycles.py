@@ -1,6 +1,6 @@
-from __future__ import division
+
 from types import FrameType
-from StringIO import StringIO
+from io import StringIO
 import gc
 import sys
 
@@ -26,7 +26,7 @@ def print_cycles(objects, outstream=sys.stdout, show_progress=False):
 
             outstream.write("   %s -- " % str(type(step)))
             if isinstance(step, dict):
-                for key, val in step.items():
+                for key, val in list(step.items()):
                     if val is next:
                         outstream.write("[%s]" % repr(key))
                         break
@@ -97,7 +97,7 @@ def exercise():
   assert lines[1].count("bad_class") == 2
   assert lines[2].count("dict") == 1
 
-  print "OK"
+  print("OK")
 
 # =============================================================================
 if (__name__ == "__main__"):

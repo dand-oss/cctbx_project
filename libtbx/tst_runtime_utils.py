@@ -1,4 +1,4 @@
-from __future__ import division
+
 from libtbx import runtime_utils
 from libtbx import easy_pickle
 from libtbx import easy_run
@@ -81,6 +81,6 @@ if __name__ == "__main__" :
   exercise()
   exercise2()
   if ("-q" in sys.argv) :
-    print "Testing queueing system support..."
+    print("Testing queueing system support...")
     exercise3()
-  print "OK"
+  print("OK")

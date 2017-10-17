@@ -1,7 +1,7 @@
-from __future__ import division
-from __future__ import with_statement
 
-import cPickle as pickle
+
+
+import pickle as pickle
 
 class TemporaryFile(object):
   """

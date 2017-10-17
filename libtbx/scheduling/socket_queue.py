@@ -1,4 +1,4 @@
-from __future__ import division
+
 
 class MultiQueue(object):
 
@@ -9,8 +9,8 @@ class MultiQueue(object):
 
   def create(self, name):
 
-    import Queue
-    self.queue_for[ name ] = Queue.Queue()
+    import queue
+    self.queue_for[ name ] = queue.Queue()
 
 
   def remove(self, name):

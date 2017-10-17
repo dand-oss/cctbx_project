@@ -7,7 +7,7 @@ Installer script for CCTBX-plus packages based on automatically generated
 template.  This must be moved to the proper location to work.
 """
 
-from __future__ import division
+
 import os.path
 import sys
 libtbx_path = os.path.join(

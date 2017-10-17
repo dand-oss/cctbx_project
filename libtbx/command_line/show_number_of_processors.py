@@ -1,4 +1,4 @@
-from __future__ import division
+
 import sys
 
 def run(args):
@@ -13,9 +13,9 @@ def run(args):
   import libtbx.introspection
   n = libtbx.introspection.number_of_processors(return_value_if_unknown=None)
   if (n is not None or len(args) == 0):
-    print n
+    print(n)
   else:
-    print " ".join(args)
+    print(" ".join(args))
 
 if (__name__ == "__main__"):
   run(args=sys.argv[1:])

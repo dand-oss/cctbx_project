@@ -1,4 +1,4 @@
-from __future__ import division
+
 
 class true_false_bad_biased_up(object):
   """

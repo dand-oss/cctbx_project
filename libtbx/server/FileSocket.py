@@ -1,4 +1,4 @@
-from __future__ import division
+
 import socket
 import random
 import os, sys
@@ -27,7 +27,7 @@ def GetSocket(HOST=""):
     if i > 5:
       HOST = 'localhost'
     if i > 10:
-      print 'Port assignment failed.', HOST, portnumber
+      print('Port assignment failed.', HOST, portnumber)
       sys.exit()
 
     i += 1
@@ -72,7 +72,7 @@ class SocketConnection:
   def __repr__(self):
     try:
       return '\n '+'-'*10+' '+self.host+' ('+self.IP+') '+ \
-             '\n '+'-'*10+' '+apply(os.path.join,tuple(self.dir))+ \
+             '\n '+'-'*10+' '+os.path.join(*tuple(self.dir))+ \
              '\n '+'-'*10+' Port '+str(self.port)+' PID '+str(self.pid)
     except Exception:
       return 'socket connection '+str(self.__dict__)
@@ -104,7 +104,7 @@ class SocketConnection:
     return self.IP
 
   def GetDir(self):
-    dir = apply(os.path.join,self.dir)
+    dir = os.path.join(*self.dir)
     dir = replace(dir,'\\','/')
     return dir
 

@@ -1,5 +1,5 @@
 
-from __future__ import division
+
 import sys
 
 class colors_ (object) :
@@ -68,10 +68,10 @@ class console_out (object) :
 
 def exercise () :
   out = console_out()
-  print >> out, "Hello, world!"
+  print("Hello, world!", file=out)
   for color in ["red","blue","green","yellow","magenta","cyan"] :
     out.set_color(color)
-    print >> out, "Hello, world!"
+    print("Hello, world!", file=out)
   out.warn("this is a warning message")
   out.fail("this is a failure message")
 

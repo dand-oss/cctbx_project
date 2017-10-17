@@ -1,4 +1,4 @@
-from __future__ import division
+
 
 from libtbx import easy_pickle
 import os

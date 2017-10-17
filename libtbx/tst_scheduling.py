@@ -1,4 +1,4 @@
-from __future__ import division
+
 
 import unittest
 import time
@@ -12,14 +12,14 @@ def normal_function(arg, wait):
 def raise_runtime_error(message, wait):
 
   time.sleep( wait )
-  raise RuntimeError, message
+  raise RuntimeError(message)
 
 
 def raise_sorry(message, wait):
 
   time.sleep( wait )
   from libtbx.utils import Sorry
-  raise Sorry, message
+  raise Sorry(message)
 
 
 def crash_python(wait):
@@ -36,7 +36,7 @@ class TestManager(unittest.TestCase):
     self.assertTrue( manager.is_empty() )
     jobid = manager.submit( target = normal_function, args = ( value, 0.05 ) )
     self.assertFalse( manager.is_empty() )
-    result = manager.results().next()
+    result = next(manager.results())
     self.assertEqual( result[0], jobid )
     self.assertEqual( normal_function( arg = value, wait = 0 ), result[1]() )
     self.assertTrue( manager.is_empty() )
@@ -47,7 +47,7 @@ class TestManager(unittest.TestCase):
     self.assertTrue( manager.is_empty() )
     jobid = manager.submit( target = raise_runtime_error, args = ( message, 0.05 ) )
     self.assertFalse( manager.is_empty() )
-    result = manager.results().next()
+    result = next(manager.results())
     self.assertEqual( result[0], jobid )
     self.assertRaises( RuntimeError, result[1] )
     self.assertTrue( manager.is_empty() )
@@ -58,7 +58,7 @@ class TestManager(unittest.TestCase):
     self.assertTrue( manager.is_empty() )
     jobid = manager.submit( target = raise_sorry, args = ( message, 0.05 ) )
     self.assertFalse( manager.is_empty() )
-    result = manager.results().next()
+    result = next(manager.results())
     self.assertEqual( result[0], jobid )
 
     from libtbx.utils import Sorry
@@ -71,7 +71,7 @@ class TestManager(unittest.TestCase):
     self.assertTrue( manager.is_empty() )
     jobid = manager.submit( target = crash_python, args = ( 0.05, ) )
     self.assertFalse( manager.is_empty() )
-    result = manager.results().next()
+    result = next(manager.results())
     self.assertEqual( result[0], jobid )
 
     self.assertRaises( RuntimeError, result[1] )

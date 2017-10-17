@@ -1,4 +1,4 @@
-from __future__ import division
+
 import libtbx.bundle.utils
 import libtbx.load_env
 import libtbx.path
@@ -6,7 +6,8 @@ import re
 import shutil
 import sys, os
 
-def copy_dist_files((exclude_from_binary_bundle, dist_copy), dirname, names):
+def copy_dist_files(xxx_todo_changeme, dirname, names):
+  (exclude_from_binary_bundle, dist_copy) = xxx_todo_changeme
   create_target_dir = True
   names_keep = []
   for file_name in names:

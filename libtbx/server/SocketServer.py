@@ -99,7 +99,7 @@ XXX Open problems:
 - What to do with out-of-band data?
 
 """
-from __future__ import division
+
 
 
 __version__ = "0.2"
@@ -250,12 +250,12 @@ class TCPServer:
         The default is to print a traceback and continue.
 
         """
-        print '-'*40
-        print 'Exception happened during processing of request from',
-        print client_address
+        print('-'*40)
+        print('Exception happened during processing of request from', end=' ')
+        print(client_address)
         import traceback
         traceback.print_exc()
-        print '-'*40
+        print('-'*40)
 
 
 class UDPServer(TCPServer):
@@ -318,7 +318,7 @@ class ThreadingMixIn:
 
     def process_request(self, request, client_address):
         """Start a new thread to process the request."""
-        import thread, threading
+        import _thread, threading
 
         t=threading.Thread(target=self.finish_request,
                                 args=(request, client_address))
@@ -370,7 +370,7 @@ class BaseRequestHandler:
             self.handle()
             self.finish()
         finally:
-            sys.exc_traceback = None    # Help garbage collection
+            sys.exc_info()[2] = None    # Help garbage collection
 
     def setup(self):
         pass
@@ -413,10 +413,10 @@ class DatagramRequestHandler(BaseRequestHandler):
     """Define self.rfile and self.wfile for datagram sockets."""
 
     def setup(self):
-        import StringIO
+        import io
         self.packet, self.socket = self.request
-        self.rfile = StringIO.StringIO(self.packet)
-        self.wfile = StringIO.StringIO(self.packet)
+        self.rfile = io.StringIO(self.packet)
+        self.wfile = io.StringIO(self.packet)
 
     def finish(self):
         self.socket.sendto(self.wfile.getvalue(), self.client_address)

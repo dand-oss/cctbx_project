@@ -1,4 +1,4 @@
-from __future__ import division
+
 from libtbx.utils import Usage
 import fileinput
 import sys, os
@@ -44,8 +44,8 @@ def run(command_name=os.environ.get(
     for n,line in buffer:
       sys.stdout.write(n_fmt % n + line)
       sum_n += n
-    print "Number of lines shown:", len(buffer)
-    print "Sum of counts:", sum_n
+    print("Number of lines shown:", len(buffer))
+    print("Sum of counts:", sum_n)
 
 if (__name__ == "__main__"):
   run()

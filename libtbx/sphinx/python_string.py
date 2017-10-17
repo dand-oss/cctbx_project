@@ -1,4 +1,4 @@
-from __future__ import division
+
 
 from docutils.parsers.rst import Directive
 #from docutils.parsers.rst import directives
@@ -25,7 +25,7 @@ class PythonStringDirective(Directive):
       target_must_be="",
       where_str="").object
 
-    assert isinstance(python_string, basestring)
+    assert isinstance(python_string, str)
 
 
     from docutils import statemachine

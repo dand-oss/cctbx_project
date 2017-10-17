@@ -1,4 +1,4 @@
-from __future__ import division
+
 import sys
 
 if (sys.version_info[:2] == (2,3)):
@@ -230,9 +230,9 @@ if OrderedDict is None:
       if not self:
         raise KeyError('dictionary is empty')
       if last:
-        key = reversed(self).next()
+        key = next(reversed(self))
       else:
-        key = iter(self).next()
+        key = next(iter(self))
       value = self.pop(key)
       return key, value
 
@@ -265,10 +265,10 @@ if OrderedDict is None:
       if other is None:
         pass
       elif hasattr(other, 'iteritems'):  # iteritems saves memory and lookups
-        for k, v in other.iteritems():
+        for k, v in other.items():
           self[k] = v
       elif hasattr(other, 'keys'):
-        for k in other.keys():
+        for k in list(other.keys()):
           self[k] = other[k]
       else:
         for k, v in other:
@@ -279,7 +279,7 @@ if OrderedDict is None:
     def __repr__(self):
       if not self:
         return '%s()' % (self.__class__.__name__,)
-      return '%s(%r)' % (self.__class__.__name__, self.items())
+      return '%s(%r)' % (self.__class__.__name__, list(self.items()))
 
     def copy(self):
         return self.__class__(self)
@@ -293,7 +293,7 @@ if OrderedDict is None:
 
     def __eq__(self, other):
       if isinstance(other, OrderedDict):
-        return len(self)==len(other) and self.items() == other.items()
+        return len(self)==len(other) and list(self.items()) == list(other.items())
       return dict.__eq__(self, other)
 
     def __ne__(self, other):
@@ -316,7 +316,7 @@ class deque_template(object):
       self._set_proxy.add(item)
     return self
 
-  def __nonzero__(self):
+  def __bool__(self):
     return bool(self._list_proxy)
 
   def __contains__(self, item):

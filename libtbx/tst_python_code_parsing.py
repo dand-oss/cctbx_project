@@ -1,4 +1,4 @@
-from __future__ import division
+
 
 
 def exercise_unused_imports():
@@ -357,7 +357,7 @@ def bar():
 def run():
   exercise_unused_imports()
   exercise_old_style_classes()
-  print 'OK'
+  print('OK')
 
 if __name__ == '__main__':
   run()

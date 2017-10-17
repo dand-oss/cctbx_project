@@ -1,13 +1,13 @@
-from __future__ import division
+
 
 from libtbx.queuing_system_utils import communication
 
 try:
-  import cPickle as pickle
+  import pickle as pickle
 except ImportError:
   import pickle
 import threading
-import Queue
+import queue
 import time
 
 class SchedulerActor(object):
@@ -19,8 +19,8 @@ class SchedulerActor(object):
 
     self.manager = manager
     self.waittime = waittime
-    self.jobs_in = Queue.Queue()
-    self.jobs_out = Queue.Queue()
+    self.jobs_in = queue.Queue()
+    self.jobs_out = queue.Queue()
 
     self.identifier_for = {}
     self.active = True
@@ -44,7 +44,7 @@ class SchedulerActor(object):
             block = False,
             )
 
-        except Queue.Full:
+        except queue.Full:
           break
 
         self.manager.completed_results.popleft()
@@ -54,7 +54,7 @@ class SchedulerActor(object):
         try:
           ( identifier, ( target, args, kwargs ) ) = self.jobs_in.get( block = False )
 
-        except Queue.Empty:
+        except queue.Empty:
           break
 
         i = self.manager.submit( target = target, args = args, kwargs = kwargs )
@@ -104,7 +104,7 @@ class GetJobs(communication.Command):
       try:
         jres = environment.jobs_out.get( block = False )
 
-      except Queue.Empty:
+      except queue.Empty:
         break
 
       jobs.append( jres )
@@ -210,8 +210,8 @@ class SchedulerClient(communication.Client):
       try:
         response()
 
-      except Exception, e:
-        raise RuntimeError, "Submission failure: %s" % e
+      except Exception as e:
+        raise RuntimeError("Submission failure: %s" % e)
 
       self.waiting = []
 
@@ -247,7 +247,7 @@ class PreSubmissionStatus(object):
   @staticmethod
   def is_alive(job):
 
-    raise RuntimeError, "job has not been submitted yet"
+    raise RuntimeError("job has not been submitted yet")
 
 
 class RunningStatus(object):
@@ -258,7 +258,7 @@ class RunningStatus(object):
   @staticmethod
   def start(job):
 
-    raise RuntimeError, "start called second time"
+    raise RuntimeError("start called second time")
 
 
   @staticmethod
@@ -282,7 +282,7 @@ class FinishedStatus(object):
   @staticmethod
   def start(job):
 
-    raise RuntimeError, "start called second time"
+    raise RuntimeError("start called second time")
 
 
   @staticmethod
