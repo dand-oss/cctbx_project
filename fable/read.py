@@ -488,7 +488,7 @@ def load_includes(global_line_index_generator, stripped_source_lines):
         sl = ssl.code0_locations[-1][0]
         file_path = op.join(op.dirname(sl.file_name), file_name)
       if (not op.isfile(file_path)):
-        ssl.raise_semantic_error(msg="Missing include file", i=7)
+        ssl.raise_semantic_error(msg=f"Missing include file {file_name}", i=7)
       # TODO potential performance problem if deeply nested includes
       result.extend(load(
         global_line_index_generator=global_line_index_generator,
